@@ -1,0 +1,25 @@
+﻿<Window x:Class="_20240829_PilotControlSystem.InstrumentPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:_20240829_PilotControlSystem"
+        Title="InstrumentPanel" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <DockPanel LastChildFill="True">
+        <UniformGrid Rows="4" Columns="3">
+            <UniformGrid Rows="2" Columns="0">
+                <Label Content="General Information" FontSize="27" Height="auto" Width="auto" HorizontalAlignment="Center"/>
+                    <UniformGrid Rows="2" Columns="2">
+                        <TextBlock TextWrapping="Wrap" Text="Engine Speed in ml/h:"/>
+                        <TextBox Text="0" IsReadOnly="True" Name="EngineRPM"/>
+                        <TextBlock TextWrapping="Wrap" Text="Speed in ml/h:"/>
+                        <TextBox Text="123" IsReadOnly="True"/>
+                        <TextBlock TextWrapping="Wrap" Text="Weight in funts:"/>
+                        <TextBox Text="123" IsReadOnly="True"/>
+                        <TextBlock TextWrapping="Wrap" Text="Temperature in F:"/>
+                    <TextBox Text="123" IsReadOnly="True"/>
+                </UniformGrid>
+            </UniformGrid>
+        </UniformGrid>
+    </DockPanel>
+</Window>
