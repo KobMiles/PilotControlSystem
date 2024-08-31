@@ -5,7 +5,7 @@ using System.Text;
 
 namespace _20240829_PilotControlSystem
 {
-    internal class FuelSystem
+    public class FuelSystem
     {
     }
 }
