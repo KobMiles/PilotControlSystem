@@ -13,13 +13,14 @@
                         <TextBlock TextWrapping="Wrap" Text="Engine Speed in ml/h:"/>
                         <TextBox Text="0" IsReadOnly="True" Name="EngineRPM"/>
                         <TextBlock TextWrapping="Wrap" Text="Speed in ml/h:"/>
-                        <TextBox Text="123" IsReadOnly="True"/>
+                        <TextBox Text="123" IsReadOnly="True" Name="Speed"/>
                         <TextBlock TextWrapping="Wrap" Text="Weight in funts:"/>
-                        <TextBox Text="123" IsReadOnly="True"/>
+                        <TextBox Text="123" IsReadOnly="True" Name="Fuel"/>
                         <TextBlock TextWrapping="Wrap" Text="Temperature in F:"/>
                     <TextBox Text="123" IsReadOnly="True"/>
                 </UniformGrid>
             </UniformGrid>
+            <Button Content="Button" Click="Button_Click"/>
         </UniformGrid>
     </DockPanel>
 </Window>

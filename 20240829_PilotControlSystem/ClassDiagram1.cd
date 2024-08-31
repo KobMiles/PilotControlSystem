@@ -3,41 +3,41 @@
   <Class Name="_20240829_PilotControlSystem.Aircraft" Collapsed="true">
     <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAJACAAAAAAAAEAAAAAAIBAAAAAACAAA=</HashCode>
-      <FileName>Aircraft.cs</FileName>
+      <HashCode>AAAAAIAAQAAAAJACAAAAAAAAEIAACAAIAAAAAAAKAAA=</HashCode>
+      <FileName>Classes\Aircraft.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_20240829_PilotControlSystem.Indicator" Collapsed="true">
     <Position X="7.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAA=</HashCode>
-      <FileName>Indicators.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Indicators.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_20240829_PilotControlSystem.ControlSystem">
-    <Position X="4.75" Y="3" Width="1.5" />
+    <Position X="5.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ControlSystem.cs</FileName>
+      <FileName>Classes\ControlSystem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_20240829_PilotControlSystem.FuelSystem">
-    <Position X="1" Y="4.75" Width="1.5" />
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>FuelSystem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\FuelSystem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_20240829_PilotControlSystem.Engine">
-    <Position X="2.75" Y="3" Width="1.5" />
+    <Position X="2.75" Y="1.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>QAAAAIAAQCAAAAAAAIAAAAABAAABAAAAIQAAAAAAAAE=</HashCode>
-      <FileName>Engine.cs</FileName>
+      <HashCode>QAAAAIAEQCAAAAAAAIAAAAABAAAAAAAAIQAAAAAAAAE=</HashCode>
+      <FileName>Classes\Engine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _20240829_PilotControlSystem
 {
-    public class Aircraft
+    internal class Aircraft
     {
         private readonly string _namePlane;
         private readonly string _modelPlane;
@@ -33,7 +33,8 @@ namespace _20240829_PilotControlSystem
             _bortNumber = bortNumber;
             _indicators = new List<Indicator>
             {
-                new SpeedIndicator(_engine)
+                new SpeedIndicator(_engine),
+                new FuelIndicator(_engine)
             };
         }
 
@@ -45,9 +46,30 @@ namespace _20240829_PilotControlSystem
         {
             _engine.Stop();
         }
-        public void Gas(double procentGas)
+        public void Gas(int procentGas)
         {
             _engine.Gas(procentGas);
+        }
+
+        public double GetEngineRPM()
+        {
+            return _engine.GetRPM();
+        }
+        public string GetSpeedInString()
+        {
+            return _indicators[0].SendValue().ToString();
+        }
+        public double GetSpeedInDouble()
+        {
+            return _indicators[0].SendValue();
+        }
+        public double GetFuelInDouble()
+        {
+            return _indicators[1].SendValue();
+        }
+        public string GetFuelInString()
+        {
+            return _indicators[1].SendValue().ToString();
         }
     }
 }

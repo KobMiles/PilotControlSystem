@@ -18,7 +18,7 @@ namespace _20240829_PilotControlSystem
     public partial class InstrumentPanel : Window
     {
         private DispatcherTimer _timer;
-        public Aircraft Plane = new Aircraft("a", "a", "a");
+        internal Aircraft Plane = new Aircraft("a", "a", "a");
         public InstrumentPanel()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace _20240829_PilotControlSystem
             _timer.Tick += Timer_Tick;
             _timer.Start();
 
-            Plane.Engine.Start();
+            Plane.StartEngine();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -38,8 +38,14 @@ namespace _20240829_PilotControlSystem
 
         private void UpdateUI()
         {
-            EngineRPM.Text = Plane.Engine.RPM.ToString();
-            EngineRPM.Text = Plane.Engine.RPM.ToString();
+            EngineRPM.Text = Plane.GetEngineRPM().ToString();
+            Speed.Text = Plane.GetSpeedInString();
+            Fuel.Text = Plane.GetFuelInString();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Plane.Gas(100);
         }
     }
 

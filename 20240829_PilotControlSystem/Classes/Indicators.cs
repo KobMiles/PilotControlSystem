@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace _20240829_PilotControlSystem
 {
-    public abstract class Indicator
+    internal abstract class Indicator
     {
-        public abstract int SendValue();
+        public abstract double SendValue();
     }
 }
