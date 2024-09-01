@@ -19,6 +19,8 @@ namespace _20240829_PilotControlSystem
     {
         private DispatcherTimer _timer;
         internal Aircraft Plane = new Aircraft("a", "a", "a");
+
+        private int valueChangedCount = 0;
         public InstrumentPanel()
         {
             InitializeComponent();
@@ -27,8 +29,6 @@ namespace _20240829_PilotControlSystem
             _timer.Interval = TimeSpan.FromMilliseconds(400);
             _timer.Tick += Timer_Tick;
             _timer.Start();
-
-            Plane.StartEngine();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -41,11 +41,24 @@ namespace _20240829_PilotControlSystem
             EngineRPM.Text = Plane.GetEngineRPM().ToString();
             Speed.Text = Plane.GetSpeedInString();
             Fuel.Text = Plane.GetFuelInString();
+            Plane.Gas((int)SliderGas.Value);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Plane.Gas(100);
+            Plane.StartEngine();
+            SliderGas.Value = 50;
+            ButtonStartEngine.IsEnabled = false;
+        }
+
+        private void Slider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Plane.Gas((int)SliderGas.Value);
+        }
+
+        private void SliderGas_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Plane.Gas((int)SliderGas.Value);
         }
     }
 

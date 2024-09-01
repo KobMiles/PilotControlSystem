@@ -51,6 +51,10 @@ namespace _20240829_PilotControlSystem
             _engine.Gas(procentGas);
         }
 
+        public bool IsEngineRunning()
+        {
+            return _engine.IsRunning();
+        }
         public double GetEngineRPM()
         {
             return _engine.GetRPM();

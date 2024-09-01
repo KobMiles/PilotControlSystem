@@ -20,7 +20,8 @@
                     <TextBox Text="123" IsReadOnly="True"/>
                 </UniformGrid>
             </UniformGrid>
-            <Button Content="Button" Click="Button_Click"/>
+            <Button Name="ButtonStartEngine" Content="Start Engine" Click="Button_Click" />
+            <Slider Name="SliderGas" Width="120" MouseLeftButtonUp="Slider_MouseLeftButtonUp" Maximum="100" ValueChanged="SliderGas_ValueChanged"/>
         </UniformGrid>
     </DockPanel>
 </Window>

@@ -12,7 +12,7 @@ namespace _20240829_PilotControlSystem
         private Engine _engine;
 
         private const int MAX_RPM = 6101;
-        private const int MIN_RPM = 3101;
+        private const int MIN_RPM = 3701;
         private const int MAX_SPEED = 900;
 
         public SpeedIndicator(Engine engine)

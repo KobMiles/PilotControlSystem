@@ -9,7 +9,7 @@ namespace _20240829_PilotControlSystem
     internal class Engine
     {
         private const int NORMAL_MINIMUM_RPM_AFTER_START = 3000;
-        private const int NORMAL_MAXIMUM_RPM_AFTER_START = 3100;
+        private const int NORMAL_MAXIMUM_RPM_AFTER_START = 3101;
         private const int MAX_RPM = 6101;
 
         private int _procentGas;
@@ -36,8 +36,9 @@ namespace _20240829_PilotControlSystem
         {
             _isRunning = true;
             _procentGas = 50;
-            UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
-                NORMAL_MAXIMUM_RPM_AFTER_START));
+            //UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
+            //    NORMAL_MAXIMUM_RPM_AFTER_START));
+            Gas(50);
         }
         public void Stop()
         {
@@ -53,14 +54,20 @@ namespace _20240829_PilotControlSystem
         {
             return _fuelSystem.GetFuel();
         }
+        public bool IsRunning()
+        {
+            return _isRunning;
+        }
+
         private async void UpdateRPMAsync(double newRPM)
         {
+            if (!_isRunning) return;
             if (newRPM > _rpm)
             {
                 while (_rpm <= newRPM)
                 {
                     await Task.Delay(400);
-                    _rpm += _randomRPM.Next(26, 29);
+                    _rpm += _randomRPM.Next(11, 12);
                 }
             }
             else
@@ -68,12 +75,12 @@ namespace _20240829_PilotControlSystem
                 while (_rpm > newRPM)
                 {
                     await Task.Delay(400);
-                    _rpm -= _randomRPM.Next(26, 29);
-                    if (_rpm < 0)
-                    {
-                        _rpm = 0;
-                        _isRunning = false;
-                    }
+                    _rpm -= _randomRPM.Next(11, 12);
+                }
+                if (_rpm < 0)
+                {
+                    _rpm = 0;
+                    _isRunning = false;
                 }
             }
         }
