@@ -8,17 +8,23 @@ namespace _20240829_PilotControlSystem
 {
     internal class Engine
     {
+        #region ---=== Fields ===---
+
         private const int NORMAL_MINIMUM_RPM_AFTER_START = 3000;
         private const int NORMAL_MAXIMUM_RPM_AFTER_START = 3101;
         private const int MAX_RPM = 6101;
 
         private int _procentGas;
-        private double _rpm;
+        private int _rpm;
 
         private bool _isRunning;
 
         private FuelSystem _fuelSystem;
         private Random _randomRPM = new Random();
+
+        #endregion
+
+        #region ---=== Constructions ===---
 
         public Engine()
         {
@@ -27,6 +33,9 @@ namespace _20240829_PilotControlSystem
             _fuelSystem = new(this);
         }
 
+        #endregion
+
+        #region ---=== Methods ===---
         public double GetRPM()
         {
             return _rpm;
@@ -36,9 +45,8 @@ namespace _20240829_PilotControlSystem
         {
             _isRunning = true;
             _procentGas = 50;
-            //UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
-            //    NORMAL_MAXIMUM_RPM_AFTER_START));
-            Gas(50);
+            UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
+                NORMAL_MAXIMUM_RPM_AFTER_START));
         }
         public void Stop()
         {
@@ -61,28 +69,31 @@ namespace _20240829_PilotControlSystem
 
         private async void UpdateRPMAsync(double newRPM)
         {
-            if (!_isRunning) return;
-            if (newRPM > _rpm)
+            if (_isRunning)
             {
-                while (_rpm <= newRPM)
+                if (newRPM > _rpm)
                 {
-                    await Task.Delay(400);
-                    _rpm += _randomRPM.Next(11, 12);
+                    while (_rpm <= newRPM)
+                    {
+                        await Task.Delay(200);
+                        _rpm += 60;
+                    }
                 }
-            }
-            else
-            {
-                while (_rpm > newRPM)
+                else
                 {
-                    await Task.Delay(400);
-                    _rpm -= _randomRPM.Next(11, 12);
-                }
-                if (_rpm < 0)
-                {
-                    _rpm = 0;
-                    _isRunning = false;
+                    while (_rpm > newRPM)
+                    {
+                        await Task.Delay(400);
+                        _rpm -= 90;
+                    }
+                    if (_rpm < 0)
+                    {
+                        _rpm = 0;
+                        _isRunning = false;
+                    }
                 }
             }
         }
+        #endregion
     }
 }

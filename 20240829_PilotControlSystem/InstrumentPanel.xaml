@@ -10,18 +10,20 @@
             <UniformGrid Rows="2" Columns="0">
                 <Label Content="General Information" FontSize="27" Height="auto" Width="auto" HorizontalAlignment="Center"/>
                     <UniformGrid Rows="2" Columns="2">
-                        <TextBlock TextWrapping="Wrap" Text="Engine Speed in ml/h:"/>
-                        <TextBox Text="0" IsReadOnly="True" Name="EngineRPM"/>
-                        <TextBlock TextWrapping="Wrap" Text="Speed in ml/h:"/>
-                        <TextBox Text="123" IsReadOnly="True" Name="Speed"/>
-                        <TextBlock TextWrapping="Wrap" Text="Weight in funts:"/>
-                        <TextBox Text="123" IsReadOnly="True" Name="Fuel"/>
-                        <TextBlock TextWrapping="Wrap" Text="Temperature in F:"/>
-                    <TextBox Text="123" IsReadOnly="True"/>
+                        <TextBlock TextWrapping="Wrap" Text="Engine RPM:"/>
+                        <TextBox Name="EngineRPM_TextBox" Text="0" IsReadOnly="True"/>
+                        <TextBlock TextWrapping="Wrap" Text="Speed in km/h:"/>
+                        <TextBox Name="Speed_TextBox" Text="0" IsReadOnly="True"/>
+                        <TextBlock TextWrapping="Wrap" Text="Total Fuel:"/>
+                        <TextBox Name="TotalFuel_TextBox" Text="123" IsReadOnly="True"/>
+                        <TextBlock TextWrapping="Wrap" Text="Height in feet"/>
+                        <TextBox Name="HeightInFeet" Text="123" IsReadOnly="True" />
+                        <TextBlock TextWrapping="Wrap" Text="Pitch Angle:"/>
+                        <TextBox Name="PitchAngle_TextBox" Text="123" IsReadOnly="True" />
                 </UniformGrid>
+
             </UniformGrid>
-            <Button Name="ButtonStartEngine" Content="Start Engine" Click="Button_Click" />
-            <Slider Name="SliderGas" Width="120" MouseLeftButtonUp="Slider_MouseLeftButtonUp" Maximum="100" ValueChanged="SliderGas_ValueChanged"/>
+            <Slider Name="SliderGas" Width="120" Maximum="100" PreviewMouseUp="SliderGas_PreviewMouseUp"/>
         </UniformGrid>
     </DockPanel>
 </Window>

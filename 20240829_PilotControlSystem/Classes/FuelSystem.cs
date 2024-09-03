@@ -7,8 +7,14 @@ namespace _20240829_PilotControlSystem
 {
     internal class FuelSystem
     {
+        #region ---=== Fields ===---
+
         private double _fuel;
         private Engine _engine;
+
+        #endregion
+
+        #region ---=== Constructions ===---
 
         public FuelSystem(Engine engine)
         {
@@ -23,6 +29,10 @@ namespace _20240829_PilotControlSystem
             _engine = engine;
             FuelComsumptionAsync();
         }
+
+        #endregion
+
+        #region ---=== Methods ===---
         public double GetFuel()
         {
             return _fuel;
@@ -35,6 +45,7 @@ namespace _20240829_PilotControlSystem
                 _fuel -= _engine.GetRPM() * 0.00001;
             }
         }
+        #endregion
 
     }
 }
