@@ -100,6 +100,12 @@ namespace _20240829_PilotControlSystem
         public string GetHeightInString()
         {
             return _indicators[2].SendValue().ToString();
+            //return _controlSystem.GetHeight().ToString();
+        }
+
+        public bool GetEngineStatus()
+        {
+            return IsEngineRunning();
         }
 
         #endregion
@@ -110,7 +116,7 @@ namespace _20240829_PilotControlSystem
         {
             _controlSystem.SetPitchAngle(pitchAngle);
         }
-        public int GetPitchAngleInInt()
+        public double GetPitchAngleInDouble()
         {
             return _controlSystem.GetPitchAngle();
         }
