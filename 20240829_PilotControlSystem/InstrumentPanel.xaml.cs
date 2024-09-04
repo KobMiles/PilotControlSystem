@@ -20,7 +20,7 @@ namespace _20240829_PilotControlSystem
         #region ---=== Fields ===---
 
         private DispatcherTimer _timer;
-        internal Aircraft Plane = new Aircraft("a", "a", "a");
+        internal Aircraft Plane = new Aircraft("SkyUP", "Boeing 737-800", "UR-SQC");
 
         #endregion
 
