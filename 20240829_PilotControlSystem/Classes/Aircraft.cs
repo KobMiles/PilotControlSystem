@@ -13,6 +13,8 @@ namespace _20240829_PilotControlSystem
         private readonly string _modelPlane;
         private readonly string _bortNumber;
 
+        private bool _pitchAngleTooHighWarning = false;
+
         private readonly Engine _engine = new();
         private ControlSystem _controlSystem;
 
@@ -45,7 +47,10 @@ namespace _20240829_PilotControlSystem
             };
             _controlSystem = new ControlSystem(_engine, _indicators[0]);
             _indicators.Add(new HeightIndicator(_controlSystem));
+            _controlSystem.AngleTooHigh += AngleTooHighWarning;
+            _controlSystem.AngleIsNormal += AngleIsNormal;
         }
+
         #endregion
 
         #region ---=== Methods ===---
@@ -124,6 +129,23 @@ namespace _20240829_PilotControlSystem
         {
             return _controlSystem.GetPitchAngle().ToString();
         }
+        #endregion
+
+        #region ||| Warning Methods |||
+
+        private void AngleTooHighWarning(object? sender, EventArgs e)
+        {
+            _pitchAngleTooHighWarning = true;
+        }
+        private void AngleIsNormal(object? sender, EventArgs e)
+        {
+            _pitchAngleTooHighWarning = false;
+        }
+        public bool GetAngleTooHighWarning()
+        {
+            return _pitchAngleTooHighWarning;
+        }
+
         #endregion
 
         #endregion
