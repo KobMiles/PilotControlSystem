@@ -19,6 +19,7 @@ namespace _20240829_PilotControlSystem
 
         private bool _isRunning;
 
+        private CancellationTokenSource _cancellationTokenSource = new();
         private FuelSystem _fuelSystem;
         private Random _randomRPM = new Random();
 
@@ -69,28 +70,54 @@ namespace _20240829_PilotControlSystem
 
         private async void UpdateRPMAsync(double newRPM)
         {
-            if (_isRunning)
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            var token = _cancellationTokenSource.Token;
+
+            if (newRPM == 0)
             {
-                if (newRPM > _rpm)
+                while (_rpm > 0)
                 {
-                    while (_rpm <= newRPM)
-                    {
-                        await Task.Delay(200);
-                        _rpm += 60;
-                    }
-                }
-                else
-                {
-                    while (_rpm > newRPM)
-                    {
-                        await Task.Delay(400);
-                        _rpm -= 90;
-                    }
+                    if (token.IsCancellationRequested)
+                        break;
+
+                    await Task.Delay(400);
+                    _rpm -= 90;
+
                     if (_rpm < 0)
                     {
                         _rpm = 0;
-                        _isRunning = false;
                     }
+                }
+                _isRunning = false;
+                return;
+            }
+
+            if (newRPM > _rpm && _isRunning)
+            {
+                while (_rpm <= newRPM)
+                {
+                    if (token.IsCancellationRequested)
+                        break;
+
+                    await Task.Delay(200);
+                    _rpm += 60;
+                }
+            }
+            else
+            {
+                while (_rpm > newRPM)
+                {
+                    if (token.IsCancellationRequested)
+                        break;
+
+                    await Task.Delay(400);
+                    _rpm -= 90;
+                }
+                if (_rpm < 0)
+                {
+                    _rpm = 0;
+                    _isRunning = false;
                 }
             }
         }
