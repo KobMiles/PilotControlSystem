@@ -68,7 +68,7 @@ namespace _20240829_PilotControlSystem
             return _isRunning;
         }
 
-        private async void UpdateRPMAsync(double newRPM)
+        private async Task UpdateRPMAsync(double newRPM)
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
