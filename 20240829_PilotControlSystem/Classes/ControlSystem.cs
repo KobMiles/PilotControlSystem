@@ -10,7 +10,8 @@ namespace _20240829_PilotControlSystem
         #region ---=== Fields ===---
         private const int MIN_SPEED_TO_UP = 300;
         private const int MAX_HEIGHT = 39370;
-        private const int MAX_ANGLE_TO_UP = 30;
+        private const int MAX_ANGLE_TO_UP = 35;
+        private const int MAX_ANGLE_TO_DOWN = -35;
 
         private double _heightInFeet;
         private double _pitchAngle;
@@ -18,6 +19,9 @@ namespace _20240829_PilotControlSystem
         private CancellationTokenSource _cancellationTokenSource = new();
         private Engine _engine;
         private Indicator _speedIndicator;
+
+        public event EventHandler AngleTooHigh = delegate { };
+        public event EventHandler AngleIsNormal = delegate { };
 
         #endregion
 
@@ -34,7 +38,8 @@ namespace _20240829_PilotControlSystem
         public void SetPitchAngle(int pitchAngle)
         {
             _pitchAngle += pitchAngle;
-            IncreaseAltitude();
+            CheckPitchAngle();
+            _ = IncreaseAltitude();
         }
         public double GetPitchAngle()
         {
@@ -43,6 +48,25 @@ namespace _20240829_PilotControlSystem
         public double GetHeight()
         {
             return _heightInFeet;
+        }
+        private void CheckPitchAngle()
+        {
+            if (_pitchAngle > MAX_ANGLE_TO_UP || _pitchAngle < MAX_ANGLE_TO_DOWN)
+            {
+                OnAngleTooHigh();
+            }
+            else if (_pitchAngle <= MAX_ANGLE_TO_UP)
+            {
+                OnAngleIsNormal();
+            }
+        }
+        protected virtual void OnAngleTooHigh()
+        {
+            AngleTooHigh?.Invoke(this, EventArgs.Empty);
+        }
+        protected virtual void OnAngleIsNormal()
+        {
+            AngleIsNormal?.Invoke(this, EventArgs.Empty);
         }
         public async Task IncreaseAltitude()
         {
