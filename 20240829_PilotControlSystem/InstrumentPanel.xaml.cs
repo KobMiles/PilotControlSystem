@@ -31,7 +31,7 @@ namespace _20240829_PilotControlSystem
             InitializeComponent();
 
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(400);
+            _timer.Interval = TimeSpan.FromMilliseconds(200);
             _timer.Tick += Timer_Tick;
             _timer.Start();
         }
@@ -40,8 +40,8 @@ namespace _20240829_PilotControlSystem
 
         #region ---=== Methods ===---
 
-            #region ||| UI Methods |||
-        private void Timer_Tick(object sender, EventArgs e)
+        #region ||| UI Methods ||| 
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             UpdateUI();
         }
@@ -54,6 +54,8 @@ namespace _20240829_PilotControlSystem
             HeightInFeet.Text = Plane.GetHeightInString();
             PitchAngle_TextBox.Text = Plane.GetPitchAngleInString();
             EngineOn_CheckBox.IsChecked = Plane.GetEngineStatus();
+
+            TheAngleTooHigh_TextBlock.Visibility = Plane.GetAngleTooHighWarning() ? Visibility.Visible : Visibility.Collapsed;
         }
         #endregion
 
@@ -83,6 +85,11 @@ namespace _20240829_PilotControlSystem
         private void UpPitch_Button_Click(object sender, RoutedEventArgs e)
         {
             Plane.SetPitchAngle(5);
+        }
+
+        private void DownPitch_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Plane.SetPitchAngle(-5);
         }
 
         #endregion
