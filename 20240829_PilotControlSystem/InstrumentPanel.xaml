@@ -6,24 +6,43 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <DockPanel LastChildFill="True">
-        <UniformGrid Rows="4" Columns="3">
-            <UniformGrid Rows="2" Columns="0">
+        <UniformGrid Rows="2" Columns="2">
+            
+            <UniformGrid Rows="5" Columns="0">
                 <Label Content="General Information" FontSize="27" Height="auto" Width="auto" HorizontalAlignment="Center"/>
                     <UniformGrid Rows="2" Columns="2">
-                        <TextBlock TextWrapping="Wrap" Text="Engine RPM:"/>
-                        <TextBox Name="EngineRPM_TextBox" Text="0" IsReadOnly="True"/>
-                        <TextBlock TextWrapping="Wrap" Text="Speed in km/h:"/>
-                        <TextBox Name="Speed_TextBox" Text="0" IsReadOnly="True"/>
-                        <TextBlock TextWrapping="Wrap" Text="Total Fuel:"/>
-                        <TextBox Name="TotalFuel_TextBox" Text="123" IsReadOnly="True"/>
-                        <TextBlock TextWrapping="Wrap" Text="Height in feet"/>
-                        <TextBox Name="HeightInFeet" Text="123" IsReadOnly="True" />
-                        <TextBlock TextWrapping="Wrap" Text="Pitch Angle:"/>
-                        <TextBox Name="PitchAngle_TextBox" Text="123" IsReadOnly="True" />
+                    <TextBlock TextWrapping="Wrap" Text="Engine RPM:" FontSize="25"/>
+                    <TextBox Name="EngineRPM_TextBox" Text="0" IsReadOnly="True" FontSize="23"/>
+                    <TextBlock TextWrapping="Wrap" Text="Speed in km/h:" FontSize="25"/>
+                    <TextBox Name="Speed_TextBox" Text="0" IsReadOnly="True" FontSize="23"/>
+                    <TextBlock TextWrapping="Wrap" Text="Total Fuel:" FontSize="25"/>
+                    <TextBox Name="TotalFuel_TextBox" Text="0" IsReadOnly="True" FontSize="23"/>
+                    <TextBlock TextWrapping="Wrap" Text="Height in feet" FontSize="25"/>
+                    <TextBox Name="HeightInFeet" Text="0" IsReadOnly="True" FontSize="23"/>
+                    <TextBlock TextWrapping="Wrap" Text="Pitch Angle:" FontSize="25"/>
+                    <TextBox Name="PitchAngle_TextBox" Text="0" IsReadOnly="True" FontSize="23"/>
                 </UniformGrid>
 
             </UniformGrid>
-            <Slider Name="SliderGas" Width="120" Maximum="100" PreviewMouseUp="SliderGas_PreviewMouseUp"/>
+            <UniformGrid Rows="4" Columns="0">
+                <TextBlock FontSize="30" TextWrapping="Wrap" Text="Warnings:" Height="auto" Width="auto" HorizontalAlignment="Center"/>
+                <TextBlock Name="ToHigh_TextBlock" FontSize="20" TextWrapping="Wrap" Text="Too High! Get down below!" Visibility="Hidden" Background="Black" Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,37"/>
+                <TextBlock Name="TheAngleTooHigh_TextBlock" FontSize="20" TextWrapping="Wrap" Text="The angle is too HIGH!" Visibility="Hidden" Background="Black" Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,35"/>
+                <TextBlock Name="LowFuel_TextBlock" FontSize="20" TextWrapping="Wrap" Text="Low fuel! Land the plane to refuel!" Visibility="Hidden" Background="Black" Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,38"/>
+            </UniformGrid>
+            <UniformGrid Rows="4" Columns="0">
+                <Slider x:Name="SliderGas" Width="200" Maximum="100" Margin="0" PreviewMouseUp="SliderGas_PreviewMouseUp"/>
+                <TextBlock FontSize="27" TextWrapping="Wrap" Text="Gas throttle" HorizontalAlignment="Center" Margin="-50"/>
+                <UniformGrid Rows="3" Columns="0" Margin="0,-54,0,-43">
+                    <Button Name="UpPitch_Button" Content="Up PITCH" FontSize="20" Width="120" Height="50"/>
+                    <TextBlock FontSize="27" TextWrapping="Wrap" Text="Set pitch angle" HorizontalAlignment="Center" Margin="0,9,0,9"/>
+                    <Button Name="DownPitch_Button" Content="Down PITCH" FontSize="20" Width="120" Height="50"/>
+                </UniformGrid>
+            </UniformGrid>
+            <UniformGrid Rows="2" Columns="0">
+                <Button Name="StartEngine_Button" Content="Start Engine" FontSize="20" Width="240" Height="100"/>
+                <Button Name="StopEngine_Button" Content="Stop Engine" FontSize="20" Width="240" Height="100"/>
+            </UniformGrid>
         </UniformGrid>
     </DockPanel>
 </Window>
