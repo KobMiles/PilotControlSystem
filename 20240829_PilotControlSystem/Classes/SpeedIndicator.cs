@@ -9,8 +9,6 @@ namespace _20240829_PilotControlSystem
     {
         #region ---=== Fields ===---
 
-        private int _speed;
-
         private Engine _engine;
 
         private const int MAX_RPM = 6101;
