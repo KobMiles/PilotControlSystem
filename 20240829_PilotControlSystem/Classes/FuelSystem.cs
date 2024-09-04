@@ -37,7 +37,7 @@ namespace _20240829_PilotControlSystem
         {
             return _fuel;
         }
-        public async void FuelComsumptionAsync()
+        public async Task FuelComsumptionAsync()
         {
             while (_fuel != 0)
             {
