@@ -36,7 +36,7 @@
                 <UniformGrid Rows="3" Columns="0" Margin="0,-54,0,-43">
                     <Button Name="UpPitch_Button" Content="Up PITCH" FontSize="20" Width="120" Height="50" Click="UpPitch_Button_Click"/>
                     <TextBlock FontSize="27" TextWrapping="Wrap" Text="Set pitch angle" HorizontalAlignment="Center" Margin="0,9,0,9"/>
-                    <Button Name="DownPitch_Button" Content="Down PITCH" FontSize="20" Width="120" Height="50"/>
+                    <Button Name="DownPitch_Button" Content="Down PITCH" FontSize="20" Width="120" Height="50" Click="DownPitch_Button_Click"/>
                 </UniformGrid>
             </UniformGrid>
             <UniformGrid Rows="3" Columns="0" Margin="0,0,0,25">
@@ -48,8 +48,8 @@
                     </CheckBox>
 
                 </UniformGrid>
-                <Button Name="StartEngine_Button" Content="Start Engine" FontSize="20" Width="240" Height="100" Click="StartEngine_Button_Click"/>
-                <Button Name="StopEngine_Button" Content="Stop Engine" FontSize="20" Width="240" Height="100" IsEnabled="False" Click="StopEngine_Button_Click"/>
+                <Button Name="StartEngine_Button" Content="Start Engine" FontSize="20" Width="240" Click="StartEngine_Button_Click" Margin="0,-17,0,16"/>
+                <Button Name="StopEngine_Button" Content="Stop Engine" FontSize="20" Width="240" IsEnabled="False" Click="StopEngine_Button_Click" Margin="0,-11,0,0"/>
             </UniformGrid>
         </UniformGrid>
     </DockPanel>
