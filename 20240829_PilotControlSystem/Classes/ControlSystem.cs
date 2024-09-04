@@ -11,12 +11,14 @@ namespace _20240829_PilotControlSystem
         private const int MIN_SPEED_TO_UP = 300;
         private const int MAX_HEIGHT = 39370;
         private const int MAX_ANGLE_TO_UP = 30;
-        private int _heightInFeet;
 
-        private int _pitchAngle;
+        private double _heightInFeet;
+        private double _pitchAngle;
 
+        private CancellationTokenSource _cancellationTokenSource = new();
         private Engine _engine;
         private Indicator _speedIndicator;
+
         #endregion
 
         #region ---=== Constructions ===---
@@ -31,34 +33,40 @@ namespace _20240829_PilotControlSystem
         #region ---=== Methods ===---
         public void SetPitchAngle(int pitchAngle)
         {
-            _pitchAngle = pitchAngle;
+            _pitchAngle += pitchAngle;
             IncreaseAltitude();
         }
-        public int GetPitchAngle()
+        public double GetPitchAngle()
+        {
+            return _pitchAngle;
+        }
+        public double GetHeight()
         {
             return _heightInFeet;
         }
-        public int GetHeight()
+        public async Task IncreaseAltitude()
         {
-            return _heightInFeet;
-        }
-        public async void IncreaseAltitude()
-        {
-            if (_speedIndicator.SendValue() > MIN_SPEED_TO_UP)
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            var token = _cancellationTokenSource.Token;
+            while (true)
             {
-
-                while (true)
+                if (token.IsCancellationRequested)
+                    break;
+                if (_speedIndicator.SendValue() > MIN_SPEED_TO_UP)
                 {
-                    _heightInFeet += 60 * (_pitchAngle / 10);
+
+                    _heightInFeet += 30 * (_pitchAngle / 5);
                     if (_heightInFeet > MAX_HEIGHT)
                     {
 
                         _heightInFeet = MAX_HEIGHT;
                         _pitchAngle = 0;
                     }
-                    await Task.Delay(200);
                 }
+                await Task.Delay(200);
             }
+
         }
         #endregion
     }
