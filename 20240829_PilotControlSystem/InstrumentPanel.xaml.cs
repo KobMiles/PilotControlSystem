@@ -52,6 +52,7 @@ namespace _20240829_PilotControlSystem
             Speed_TextBox.Text = Plane.GetSpeedInString();
             TotalFuel_TextBox.Text = Plane.GetFuelInString();
             HeightInFeet.Text = Plane.GetHeightInString();
+            PitchAngle_TextBox.Text = Plane.GetPitchAngleInString();
         }
         #endregion
 
@@ -87,6 +88,22 @@ namespace _20240829_PilotControlSystem
         #endregion
 
         #endregion
+
+        private void StartEngine_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Plane.StartEngine();
+            SliderGas.Value = 50;
+            StartEngine_Button.IsEnabled = false;
+            StopEngine_Button.IsEnabled = true;
+        }
+
+        private void StopEngine_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Plane.StopEngine();
+            SliderGas.Value = 0;
+            StartEngine_Button.IsEnabled = true;
+            StopEngine_Button.IsEnabled = false;
+        }
     }
 
 }
