@@ -31,6 +31,7 @@ namespace _20240829_PilotControlSystem
                 new FuelIndicator(_engine)
             };
             _controlSystem = new ControlSystem(_engine, _indicators[0]);
+            _indicators.Add(new HeightIndicator(_controlSystem));
         }
         public Aircraft(string namePlane, string modelPlane, string bortNumber)
         {
@@ -43,6 +44,7 @@ namespace _20240829_PilotControlSystem
                 new FuelIndicator(_engine)
             };
             _controlSystem = new ControlSystem(_engine, _indicators[0]);
+            _indicators.Add(new HeightIndicator(_controlSystem));
         }
         #endregion
 
@@ -89,17 +91,21 @@ namespace _20240829_PilotControlSystem
         {
             return _indicators[1].SendValue().ToString();
         }
+
+        public double GetHeightInDouble()
+        {
+            return _indicators[2].SendValue();
+        }
+
+        public string GetHeightInString()
+        {
+            return _indicators[2].SendValue().ToString();
+        }
+
         #endregion
 
         #region ||| ControlSystem Methods |||
-        public int GetHeightInInt()
-        {
-            return _controlSystem.GetHeight();
-        }
-        public string GetHeightInString()
-        {
-            return _controlSystem.GetHeight().ToString();
-        }
+
         public void SetPitchAngle(int pitchAngle)
         {
             _controlSystem.SetPitchAngle(pitchAngle);
