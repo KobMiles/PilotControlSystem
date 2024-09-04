@@ -46,18 +46,18 @@ namespace _20240829_PilotControlSystem
         {
             _isRunning = true;
             _procentGas = 50;
-            UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
+            _ = UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
                 NORMAL_MAXIMUM_RPM_AFTER_START));
         }
         public void Stop()
         {
             _isRunning = false;
-            UpdateRPMAsync(0);
+            _ = UpdateRPMAsync(0);
         }
         public void Gas(int procentGasBase)
         {
             _procentGas = procentGasBase;
-            UpdateRPMAsync(MAX_RPM * (_procentGas * 0.01));
+            _ = UpdateRPMAsync(MAX_RPM * (_procentGas * 0.01));
         }
         public double GetFuel()
         {
