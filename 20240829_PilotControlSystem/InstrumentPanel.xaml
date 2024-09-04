@@ -40,8 +40,8 @@
                 </UniformGrid>
             </UniformGrid>
             <UniformGrid Rows="2" Columns="0">
-                <Button Name="StartEngine_Button" Content="Start Engine" FontSize="20" Width="240" Height="100"/>
-                <Button Name="StopEngine_Button" Content="Stop Engine" FontSize="20" Width="240" Height="100"/>
+                <Button Name="StartEngine_Button" Content="Start Engine" FontSize="20" Width="240" Height="100" Click="StartEngine_Button_Click"/>
+                <Button Name="StopEngine_Button" Content="Stop Engine" FontSize="20" Width="240" Height="100" IsEnabled="False" Click="StopEngine_Button_Click"/>
             </UniformGrid>
         </UniformGrid>
     </DockPanel>
