@@ -53,41 +53,16 @@ namespace _20240829_PilotControlSystem
             TotalFuel_TextBox.Text = Plane.GetFuelInString();
             HeightInFeet.Text = Plane.GetHeightInString();
             PitchAngle_TextBox.Text = Plane.GetPitchAngleInString();
+            EngineOn_CheckBox.IsChecked = Plane.GetEngineStatus();
         }
         #endregion
 
         #region ||| Elements Methods |||
 
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Plane.StartEngine();
-        //    SliderGas.Value = 50;
-        //    ButtonStartEngine.IsEnabled = false;
-        //}
-
-        ////private void Slider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        ////{
-        ////    Plane.Gas((int)SliderGas.Value);
-        ////}
-
-        //private void SliderGas_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    Plane.Gas((int)SliderGas.Value);
-        //}
-
         private void SliderGas_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             Plane.Gas((int)SliderGas.Value);
         }
-
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    Plane.SetPitchAngle(30);
-        //}
-
-        #endregion
-
-        #endregion
 
         private void StartEngine_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -104,6 +79,15 @@ namespace _20240829_PilotControlSystem
             StartEngine_Button.IsEnabled = true;
             StopEngine_Button.IsEnabled = false;
         }
+
+        private void UpPitch_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Plane.SetPitchAngle(5);
+        }
+
+        #endregion
+
+        #endregion
     }
 
 }
