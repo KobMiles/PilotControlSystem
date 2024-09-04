@@ -20,14 +20,14 @@ namespace _20240829_PilotControlSystem
         {
             _engine = engine;
             _fuel = 500.0;
-            FuelComsumptionAsync();
+            _ = FuelComsumptionAsync();
         }
 
         public FuelSystem(double fuel, Engine engine)
         {
             _fuel = fuel;
             _engine = engine;
-            FuelComsumptionAsync();
+            _ = FuelComsumptionAsync();
         }
 
         #endregion
