@@ -7,10 +7,10 @@
         ResizeMode="NoResize">
     <DockPanel LastChildFill="True">
         <UniformGrid Rows="2" Columns="2">
-            
+
             <UniformGrid Rows="5" Columns="0">
                 <Label Content="General Information" FontSize="27" Height="auto" Width="auto" HorizontalAlignment="Center"/>
-                    <UniformGrid Rows="2" Columns="2">
+                <UniformGrid Rows="2" Columns="2">
                     <TextBlock TextWrapping="Wrap" Text="Engine RPM:" FontSize="25"/>
                     <TextBox Name="EngineRPM_TextBox" Text="0" IsReadOnly="True" FontSize="23"/>
                     <TextBlock TextWrapping="Wrap" Text="Speed in km/h:" FontSize="25"/>
@@ -34,12 +34,20 @@
                 <Slider x:Name="SliderGas" Width="200" Maximum="100" Margin="0" PreviewMouseUp="SliderGas_PreviewMouseUp"/>
                 <TextBlock FontSize="27" TextWrapping="Wrap" Text="Gas throttle" HorizontalAlignment="Center" Margin="-50"/>
                 <UniformGrid Rows="3" Columns="0" Margin="0,-54,0,-43">
-                    <Button Name="UpPitch_Button" Content="Up PITCH" FontSize="20" Width="120" Height="50"/>
+                    <Button Name="UpPitch_Button" Content="Up PITCH" FontSize="20" Width="120" Height="50" Click="UpPitch_Button_Click"/>
                     <TextBlock FontSize="27" TextWrapping="Wrap" Text="Set pitch angle" HorizontalAlignment="Center" Margin="0,9,0,9"/>
                     <Button Name="DownPitch_Button" Content="Down PITCH" FontSize="20" Width="120" Height="50"/>
                 </UniformGrid>
             </UniformGrid>
-            <UniformGrid Rows="2" Columns="0">
+            <UniformGrid Rows="3" Columns="0" Margin="0,0,0,25">
+                <UniformGrid Rows="2" Columns="0" Margin="0,0,0,35">
+                    <CheckBox Name="EngineOn_CheckBox" Content="Engine on" IsEnabled="False" Margin="0,27,0,-31" Width="138">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+
+                </UniformGrid>
                 <Button Name="StartEngine_Button" Content="Start Engine" FontSize="20" Width="240" Height="100" Click="StartEngine_Button_Click"/>
                 <Button Name="StopEngine_Button" Content="Stop Engine" FontSize="20" Width="240" Height="100" IsEnabled="False" Click="StopEngine_Button_Click"/>
             </UniformGrid>
