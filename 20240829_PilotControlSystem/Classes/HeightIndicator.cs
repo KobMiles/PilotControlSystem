@@ -1,20 +1,10 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
-    class HeightIndicator : Indicator
+    internal class HeightIndicator(ControlSystem controlSystem) : Indicator
     {
-        ControlSystem _controlSystem;
-        public HeightIndicator(ControlSystem controlSystem)
+        public override double GetValue()
         {
-            _controlSystem = controlSystem;
-        }
-        public override double SendValue()
-        {
-            return _controlSystem.GetHeight();
-        }
-
-        public override string ToString()
-        {
-            return _controlSystem.GetHeight().ToString();
+            return controlSystem.GetHeight();
         }
     }
 }
