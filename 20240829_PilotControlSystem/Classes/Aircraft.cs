@@ -1,4 +1,4 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
     internal class Aircraft
     {
@@ -18,7 +18,8 @@
         #region ---=== Constructions ===---
         public Aircraft()
         {
-            _namePlane = "null";
+            //_namePlane = "null";
+            _namePlane = string.Empty;
             _modelPlane = "null";
             _bortNumber = "null";
             _indicators = new List<Indicator>
@@ -58,48 +59,36 @@
         {
             _engine.Stop();
         }
-        public void Gas(int procentGas)
+        public void Gas(int percentGas)
         {
-            _engine.Gas(procentGas);
+            _engine.Gas(percentGas);
         }
 
         public bool IsEngineRunning()
         {
             return _engine.IsRunning();
         }
-        public double GetEngineRPM()
+        public double GetEngineRpm()
         {
-            return _engine.GetRPM();
+            return _engine.GetRpm();
         }
         #endregion
 
         #region ||| Indicators Methods |||
-        public string GetSpeedInString()
+
+        public double GetSpeed()
         {
-            return _indicators[0].SendValue().ToString();
-        }
-        public double GetSpeedInDouble()
-        {
-            return _indicators[0].SendValue();
-        }
-        public double GetFuelInDouble()
-        {
-            return _indicators[1].SendValue();
-        }
-        public string GetFuelInString()
-        {
-            return _indicators[1].SendValue().ToString();
+            return _indicators[0].GetValue();
         }
 
-        public double GetHeightInDouble()
+        public double GetFuel()
         {
-            return _indicators[2].SendValue();
+            return _indicators[1].GetValue();
         }
 
-        public string GetHeightInString()
+        public double GetHeight()
         {
-            return _indicators[2].SendValue().ToString();
-            //return _controlSystem.GetHeight().ToString();
+            return _indicators[2].GetValue();
         }
 
         public bool GetEngineStatus()
@@ -115,14 +104,11 @@
         {
             _controlSystem.SetPitchAngle(pitchAngle);
         }
-        public double GetPitchAngleInDouble()
+        public double GetPitchAngle()
         {
             return _controlSystem.GetPitchAngle();
         }
-        public string GetPitchAngleInString()
-        {
-            return _controlSystem.GetPitchAngle().ToString();
-        }
+
         #endregion
 
         #region ||| Warning Methods |||
