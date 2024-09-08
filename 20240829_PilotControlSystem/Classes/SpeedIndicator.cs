@@ -1,4 +1,4 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
     internal class SpeedIndicator : Indicator
     {
@@ -23,15 +23,11 @@
 
         #region ---=== Methods ===---
 
-        public override double SendValue()
+        public override double GetValue()
         {
-            if (_engine.GetRPM() < MIN_RPM) return 0;
-            return Math.Round(((_engine.GetRPM() - MIN_RPM) / (MAX_RPM - MIN_RPM)) * MAX_SPEED);
-        }
+            var speed = Math.Round((_engine.GetRpm() - MIN_RPM) / (MAX_RPM - MIN_RPM) * MAX_SPEED);
+            return _engine.GetRpm() < MIN_RPM ? 0.0 : _engine.GetRpm();
 
-        public override string ToString()
-        {
-            return $"The speed of the airplane: {SendValue()}";
         }
 
         #endregion
