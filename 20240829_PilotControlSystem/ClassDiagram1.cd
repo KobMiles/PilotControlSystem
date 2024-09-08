@@ -1,44 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="_20240829_PilotControlSystem.Aircraft" Collapsed="true">
-    <Position X="5.5" Y="0.5" Width="1.5" />
+  <Class Name="_20240829_PilotControlSystem.Aircraft">
+    <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAQAAAAJACAAAAAAAAEIAACAAIAAAAAAAKAAA=</HashCode>
+      <HashCode>AEAAAIAAUQAAEJACUBAQAQAAEAAACAAIAAAAAAAKlAQ=</HashCode>
       <FileName>Classes\Aircraft.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_engine" />
+      <Field Name="_controlSystem" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_indicators" />
+    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="_20240829_PilotControlSystem.Indicator" Collapsed="true">
-    <Position X="7.75" Y="3.25" Width="1.5" />
+  <Class Name="_20240829_PilotControlSystem.Indicator">
+    <Position X="9.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\Indicators.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_20240829_PilotControlSystem.ControlSystem">
-    <Position X="5.5" Y="4.5" Width="1.5" />
+    <Position X="3.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAA4AAAAAAAAAAQAEQAAJAAAQCAAAKAAAIAAQQAEA=</HashCode>
       <FileName>Classes\ControlSystem.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_engine" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="_20240829_PilotControlSystem.FuelSystem">
-    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAQAgA=</HashCode>
       <FileName>Classes\FuelSystem.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_engine" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="_20240829_PilotControlSystem.Engine">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+    <Position X="2" Y="1.5" Width="1.5" />
     <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>QAAAAIAEQCAAAAAAAIAAAAABAAAAAAAAIQAAAAAAAAE=</HashCode>
+      <HashCode>QAAAAICEQCEAAAAAAIAAQAAAAAAAAAAAIYAAAQAAAgE=</HashCode>
       <FileName>Classes\Engine.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="_20240829_PilotControlSystem.SpeedIndicator">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAkIAAAQAQAAAAA=</HashCode>
+      <FileName>Classes\SpeedIndicator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_engine" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_20240829_PilotControlSystem.HeightIndicator">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAGAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\HeightIndicator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_controlSystem" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_20240829_PilotControlSystem.FuelIndicator">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgIAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\FuelIndicator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_engine" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
