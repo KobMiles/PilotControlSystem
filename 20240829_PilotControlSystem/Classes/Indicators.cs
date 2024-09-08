@@ -1,8 +1,7 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
     internal abstract class Indicator
-    {
-        public abstract double SendValue();
-        public abstract override string ToString();
+    {#
+        public abstract double GetValue();
     }
 }
