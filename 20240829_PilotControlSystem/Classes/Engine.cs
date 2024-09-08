@@ -57,7 +57,7 @@
 
         public double GetFuel()
         {
-            return _fuelSystem.GetFuel();
+            return _fuelSystem.Fuel;
         }
 
         public bool IsRunning()
