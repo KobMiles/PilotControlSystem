@@ -1,21 +1,21 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
     internal class Engine
     {
         #region ---=== Fields ===---
 
-        private const int NORMAL_MINIMUM_RPM_AFTER_START = 3000;
-        private const int NORMAL_MAXIMUM_RPM_AFTER_START = 3101;
-        private const int MAX_RPM = 6101;
+        private const int MaxRpm = 6101;
+        private const int DelayTimeMilliseconds = 400;
+        private const int MotorStepIncrement = 60;
 
-        private int _procentGas;
+        private int _percentGas;
         private int _rpm;
 
         private bool _isRunning;
 
         private CancellationTokenSource _cancellationTokenSource = new();
-        private FuelSystem _fuelSystem;
-        private Random _randomRPM = new Random();
+
+        private readonly FuelSystem _fuelSystem;
 
         #endregion
 
@@ -25,13 +25,14 @@
         {
             _isRunning = false;
             _rpm = 0;
-            _fuelSystem = new(this);
+            _fuelSystem = new FuelSystem(this);
         }
 
         #endregion
 
         #region ---=== Methods ===---
-        public double GetRPM()
+
+        public double GetRpm()
         {
             return _rpm;
         }
@@ -39,43 +40,47 @@
         public void Start()
         {
             _isRunning = true;
-            _procentGas = 50;
-            _ = UpdateRPMAsync(_randomRPM.Next(NORMAL_MINIMUM_RPM_AFTER_START,
-                NORMAL_MAXIMUM_RPM_AFTER_START));
+            Gas(50);
         }
+
         public void Stop()
         {
             _isRunning = false;
-            _ = UpdateRPMAsync(0);
+            Gas(0);
         }
-        public void Gas(int procentGasBase)
+
+        public void Gas(int percentGasBase)
         {
-            _procentGas = procentGasBase;
-            _ = UpdateRPMAsync(MAX_RPM * (_procentGas * 0.01));
+            _percentGas = percentGasBase;
+            _ = UpdateRpmAsync(MaxRpm * (_percentGas * 0.01));
         }
+
         public double GetFuel()
         {
             return _fuelSystem.GetFuel();
         }
+
         public bool IsRunning()
         {
             return _isRunning;
         }
 
-        private async Task UpdateRPMAsync(double newRPM)
+        private async Task UpdateRpmAsync(double newRpm)
         {
-            _cancellationTokenSource.Cancel();
+            _ = _cancellationTokenSource.CancelAsync();
             _cancellationTokenSource = new CancellationTokenSource();
             var token = _cancellationTokenSource.Token;
 
-            if (newRPM == 0)
+            if (newRpm == 0)
             {
                 while (_rpm > 0)
                 {
                     if (token.IsCancellationRequested)
+                    {
                         break;
+                    }
 
-                    await Task.Delay(400);
+                    await Task.Delay(DelayTimeMilliseconds, token);
                     _rpm -= 90;
 
                     if (_rpm < 0)
@@ -87,27 +92,32 @@
                 return;
             }
 
-            if (newRPM > _rpm && _isRunning)
+            if (newRpm > _rpm && _isRunning)
             {
-                while (_rpm <= newRPM)
+                while (_rpm <= newRpm)
                 {
                     if (token.IsCancellationRequested)
+                    {
                         break;
+                    }
 
-                    await Task.Delay(200);
-                    _rpm += 60;
+                    await Task.Delay(DelayTimeMilliseconds, token);
+                    _rpm += MotorStepIncrement;
                 }
             }
             else
             {
-                while (_rpm > newRPM)
+                while (_rpm > newRpm)
                 {
                     if (token.IsCancellationRequested)
+                    {
                         break;
+                    }
 
-                    await Task.Delay(400);
-                    _rpm -= 90;
+                    await Task.Delay(DelayTimeMilliseconds, token);
+                    _rpm -= MotorStepIncrement;
                 }
+
                 if (_rpm < 0)
                 {
                     _rpm = 0;
@@ -115,6 +125,7 @@
                 }
             }
         }
+
         #endregion
     }
 }
