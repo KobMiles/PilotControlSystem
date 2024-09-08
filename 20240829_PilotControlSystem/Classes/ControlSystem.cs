@@ -1,4 +1,4 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
     internal class ControlSystem
     {
