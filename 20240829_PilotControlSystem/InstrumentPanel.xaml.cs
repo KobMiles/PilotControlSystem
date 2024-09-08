@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using _20240829_PilotControlSystem.Classes;
 
 namespace _20240829_PilotControlSystem
 {
@@ -37,7 +38,7 @@ namespace _20240829_PilotControlSystem
 
         private void UpdateUI()
         {
-            EngineRPM_TextBox.Text = Plane.GetEngineRPM().ToString();
+            EngineRPM_TextBox.Text = Plane.GetEngineRpm().ToString();
             Speed_TextBox.Text = Plane.GetSpeedInString();
             TotalFuel_TextBox.Text = Plane.GetFuelInString();
             HeightInFeet.Text = Plane.GetHeightInString();
