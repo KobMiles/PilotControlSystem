@@ -1,32 +1,14 @@
-﻿namespace _20240829_PilotControlSystem
+﻿namespace _20240829_PilotControlSystem.Classes
 {
-    internal class FuelIndicator : Indicator
+    internal class FuelIndicator(Engine engine) : Indicator
     {
-        #region ---=== Fields ===---
-
-        Engine _engine;
-
-        #endregion
-
-        #region ---=== Constructions ===---
-
-        public FuelIndicator(Engine engine)
-        {
-            _engine = engine;
-        }
-
-        #endregion
-
         #region ---=== Methods ===---
-        public override double SendValue()
+
+        public override double GetValue()
         {
-            return Math.Round(_engine.GetFuel(), 2, MidpointRounding.ToZero);
+            return Math.Round(engine.GetFuel(), 2, MidpointRounding.ToZero);
         }
 
-        public override string ToString()
-        {
-            return $"Fuel in the tank: {SendValue()}";
-        }
         #endregion
     }
 }
