@@ -3,13 +3,13 @@
     internal class ControlSystem
     {
         #region ---=== Fields ===---
-        private const int MIN_SPEED_TO_UP = 300;
+        private const int Min_Speed_To_Up = 300;
         private const int MAX_HEIGHT = 39370;
         private const int MAX_ANGLE_TO_UP = 35;
         private const int MAX_ANGLE_TO_DOWN = -35;
 
-        private double _heightInFeet;
-        private double _pitchAngle;
+        private int _heightInFeet;
+        private int _pitchAngle;
 
         private CancellationTokenSource _cancellationTokenSource = new();
         private Engine _engine;
@@ -36,11 +36,11 @@
             CheckPitchAngle();
             _ = IncreaseAltitude();
         }
-        public double GetPitchAngle()
+        public int GetPitchAngle()
         {
             return _pitchAngle;
         }
-        public double GetHeight()
+        public int GetHeight()
         {
             return _heightInFeet;
         }
@@ -72,7 +72,7 @@
             {
                 if (token.IsCancellationRequested)
                     break;
-                if (_speedIndicator.SendValue() > MIN_SPEED_TO_UP)
+                if (_speedIndicator.GetValue() > Min_Speed_To_Up)
                 {
 
                     _heightInFeet += 30 * (_pitchAngle / 5);
