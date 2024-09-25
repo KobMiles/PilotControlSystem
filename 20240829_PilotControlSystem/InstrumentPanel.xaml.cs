@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using _20240829_PilotControlSystem.Classes;
 
 namespace _20240829_PilotControlSystem
 {
@@ -8,8 +10,8 @@ namespace _20240829_PilotControlSystem
     {
         #region ---=== Fields ===---
 
-        private DispatcherTimer _timer;
-        internal Aircraft Plane = new Aircraft("SkyUP", "Boeing 737-800", "UR-SQC");
+        private readonly DispatcherTimer _timer;
+        internal Aircraft Plane = new ("SkyUP", "Boeing 737-800", "UR-SQC");
 
         #endregion
 
@@ -19,8 +21,10 @@ namespace _20240829_PilotControlSystem
         {
             InitializeComponent();
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(200);
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(200)
+            };
             _timer.Tick += Timer_Tick;
             _timer.Start();
         }
@@ -32,16 +36,17 @@ namespace _20240829_PilotControlSystem
         #region ||| UI Methods ||| 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            UpdateUI();
+            UpdateUi();
         }
 
-        private void UpdateUI()
+        private void UpdateUi()
         {
-            EngineRPM_TextBox.Text = Plane.GetEngineRPM().ToString();
-            Speed_TextBox.Text = Plane.GetSpeedInString();
-            TotalFuel_TextBox.Text = Plane.GetFuelInString();
-            HeightInFeet.Text = Plane.GetHeightInString();
-            PitchAngle_TextBox.Text = Plane.GetPitchAngleInString();
+            EngineRPM_TextBox.Text = Plane.GetEngineRpm().ToString(CultureInfo.InvariantCulture);
+            Speed_TextBox.Text = Plane.GetSpeed().ToString(CultureInfo.InvariantCulture);
+            TotalFuel_TextBox.Text = Plane.GetFuel().ToString(CultureInfo.InvariantCulture);
+            HeightInFeet.Text = Plane.GetHeight().ToString(CultureInfo.InvariantCulture);
+            PitchAngle_TextBox.Text = Plane.GetPitchAngle().ToString(CultureInfo.InvariantCulture);
+
             EngineOn_CheckBox.IsChecked = Plane.GetEngineStatus();
 
             TheAngleTooHigh_TextBlock.Visibility = Plane.GetAngleTooHighWarning() ? Visibility.Visible : Visibility.Collapsed;
