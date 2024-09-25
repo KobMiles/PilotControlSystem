@@ -5,41 +5,40 @@
         #region ---=== Fields ===---
         private readonly string _namePlane;
         private readonly string _modelPlane;
-        private readonly string _bortNumber;
+        private readonly string _boardNumber;
 
         private bool _pitchAngleTooHighWarning = false;
 
         private readonly Engine _engine = new();
-        private ControlSystem _controlSystem;
+        private readonly ControlSystem _controlSystem;
 
-        private List<Indicator> _indicators = [];
+        private List<Indicator> _indicators = new List<Indicator>();
         #endregion
 
         #region ---=== Constructions ===---
         public Aircraft()
         {
-            //_namePlane = "null";
             _namePlane = string.Empty;
-            _modelPlane = "null";
-            _bortNumber = "null";
-            _indicators = new List<Indicator>
-            {
-                new SpeedIndicator(_engine),
-                new FuelIndicator(_engine)
-            };
+            _modelPlane = string.Empty;
+            _boardNumber = string.Empty;
+            _indicators =
+                [
+                    new SpeedIndicator(_engine),
+                    new FuelIndicator(_engine)
+                ];
             _controlSystem = new ControlSystem(_engine, _indicators[0]);
             _indicators.Add(new HeightIndicator(_controlSystem));
         }
-        public Aircraft(string namePlane, string modelPlane, string bortNumber)
+        public Aircraft(string namePlane, string modelPlane, string boardNumber)
         {
             _namePlane = namePlane;
             _modelPlane = modelPlane;
-            _bortNumber = bortNumber;
+            _boardNumber = boardNumber;
             _indicators = new List<Indicator>
-            {
-                new SpeedIndicator(_engine),
-                new FuelIndicator(_engine)
-            };
+                {
+                    new SpeedIndicator(_engine),
+                    new FuelIndicator(_engine)
+                };
             _controlSystem = new ControlSystem(_engine, _indicators[0]);
             _indicators.Add(new HeightIndicator(_controlSystem));
             _controlSystem.AngleTooHigh += AngleTooHighWarning;
