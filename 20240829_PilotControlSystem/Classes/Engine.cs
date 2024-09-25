@@ -6,7 +6,8 @@
 
         private const int MaxRpm = 6101;
         private const int DelayTimeMilliseconds = 400;
-        private const int MotorStepIncrement = 60;
+        private const int MotorStepIncrement = 90;
+        private const double GasMultiplier = 0.01;
 
         private int _percentGas;
         private int _rpm;
@@ -32,7 +33,7 @@
 
         #region ---=== Methods ===---
 
-        public double GetRpm()
+        public int GetRpm()
         {
             return _rpm;
         }
@@ -52,7 +53,7 @@
         public void Gas(int percentGasBase)
         {
             _percentGas = percentGasBase;
-            _ = UpdateRpmAsync(MaxRpm * (_percentGas * 0.01));
+            _ = UpdateRpmAsync(MaxRpm * (_percentGas * GasMultiplier));
         }
 
         public double GetFuel()
@@ -81,7 +82,7 @@
                     }
 
                     await Task.Delay(DelayTimeMilliseconds, token);
-                    _rpm -= 90;
+                    _rpm -= MotorStepIncrement;
 
                     if (_rpm < 0)
                     {
