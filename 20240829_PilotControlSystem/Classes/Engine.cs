@@ -74,57 +74,72 @@
 
             if (newRpm == 0)
             {
-                while (_rpm > 0)
-                {
-                    if (token.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    await Task.Delay(DelayTimeMilliseconds, token);
-                    _rpm -= MotorStepIncrement;
-
-                    if (_rpm < 0)
-                    {
-                        _rpm = 0;
-                    }
-                }
-                _isRunning = false;
-                return;
+                _ = FullEngineStop(newRpm, token);
             }
 
             if (newRpm > _rpm && _isRunning)
             {
-                while (_rpm <= newRpm)
-                {
-                    if (token.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    await Task.Delay(DelayTimeMilliseconds, token);
-                    _rpm += MotorStepIncrement;
-                }
+                _ = IncreaseEngineSpeed(newRpm, token);
             }
             else
             {
-                while (_rpm > newRpm)
-                {
-                    if (token.IsCancellationRequested)
-                    {
-                        break;
-                    }
+                _ = DecreaseEngineSpeed(newRpm, token);
+            }
+        }
 
-                    await Task.Delay(DelayTimeMilliseconds, token);
-                    _rpm -= MotorStepIncrement;
+        private async Task DecreaseEngineSpeed(double newRpm, CancellationToken token)
+        {
+            while (_rpm > newRpm)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    break;
                 }
+
+                await Task.Delay(DelayTimeMilliseconds, token);
+                _rpm -= MotorStepIncrement;
+            }
+
+            if (_rpm < 0)
+            {
+                _rpm = 0;
+                _isRunning = false;
+            }
+        }
+
+        private async Task IncreaseEngineSpeed(double newRpm, CancellationToken token)
+        {
+            while (_rpm <= newRpm)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
+
+                await Task.Delay(DelayTimeMilliseconds, token);
+                _rpm += MotorStepIncrement;
+            }
+        }
+
+        private async Task FullEngineStop(double newRpm, CancellationToken token)
+        {
+            while (_rpm > 0)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
+
+                await Task.Delay(DelayTimeMilliseconds, token);
+                _rpm -= MotorStepIncrement;
 
                 if (_rpm < 0)
                 {
                     _rpm = 0;
-                    _isRunning = false;
                 }
             }
+            _isRunning = false;
+            return;
         }
 
         #endregion
