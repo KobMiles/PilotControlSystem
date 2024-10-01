@@ -30,7 +30,7 @@
             while (Fuel > 0)
             {
                 await Task.Delay(DelayTimeMilliseconds);
-                Fuel -= _engine.GetRpm() * FuelConsumptionRate;
+                Fuel -= _engine.EngineRpm * FuelConsumptionRate;
             }
         }
 
