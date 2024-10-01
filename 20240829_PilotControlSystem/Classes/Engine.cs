@@ -2,146 +2,82 @@
 {
     internal class Engine
     {
-        #region ---=== Fields ===---
-
         private const int MaxRpm = 6101;
         private const int DelayTimeMilliseconds = 400;
         private const int MotorStepIncrement = 90;
         private const double GasMultiplier = 0.01;
 
-        private int _percentGas;
-        private int _rpm;
+        public int EngineRpm { get; private set; }
 
-        private bool _isRunning;
+        public bool IsRunning { get; private set; }
 
         private CancellationTokenSource _cancellationTokenSource = new();
 
         private readonly FuelSystem _fuelSystem;
 
-        #endregion
-
-        #region ---=== Constructions ===---
-
         public Engine()
         {
-            _isRunning = false;
-            _rpm = 0;
+            IsRunning = false;
+            EngineRpm = 0;
             _fuelSystem = new FuelSystem(this);
         }
 
-        #endregion
+        public double Fuel => _fuelSystem.Fuel;
 
-        #region ---=== Methods ===---
-
-        public int GetRpm()
+        public async Task StartAsync()
         {
-            return _rpm;
+            IsRunning = true;
+            await AdjustThrottleAsync(50);
         }
 
-        public void Start()
+        public async Task StopAsync()
         {
-            _isRunning = true;
-            Gas(50);
+            IsRunning = false;
+            await AdjustThrottleAsync(0);
         }
 
-        public void Stop()
+        public async Task AdjustThrottleAsync(int throttlePercentage)
         {
-            _isRunning = false;
-            Gas(0);
+            await UpdateRpmAsync(MaxRpm * (throttlePercentage * GasMultiplier));
         }
 
-        public void Gas(int percentGasBase)
+        private async Task UpdateRpmAsync(double targetEngineRpm)
         {
-            _percentGas = percentGasBase;
-            _ = UpdateRpmAsync(MaxRpm * (_percentGas * GasMultiplier));
-        }
-
-        public double GetFuel()
-        {
-            return _fuelSystem.Fuel;
-        }
-
-        public bool IsRunning()
-        {
-            return _isRunning;
-        }
-
-        private async Task UpdateRpmAsync(double newRpm)
-        {
-            _ = _cancellationTokenSource.CancelAsync();
+            if (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                await _cancellationTokenSource.CancelAsync();
+            }
+            _cancellationTokenSource.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
-            var token = _cancellationTokenSource.Token;
+            var engineCancellationToken = _cancellationTokenSource.Token;
 
-            if (newRpm == 0)
-            {
-                _ = FullEngineStop(newRpm, token);
-            }
+            await AdjustEngineSpeedAsync(
+                targetEngineRpm,
+                (targetEngineRpm > EngineRpm) && IsRunning,
+                engineCancellationToken);
 
-            if (newRpm > _rpm && _isRunning)
+            if (EngineRpm <= 0)
             {
-                _ = IncreaseEngineSpeed(newRpm, token);
-            }
-            else
-            {
-                _ = DecreaseEngineSpeed(newRpm, token);
+                EngineRpm = 0;
+                IsRunning = false;
             }
         }
 
-        private async Task DecreaseEngineSpeed(double newRpm, CancellationToken token)
+        private async Task AdjustEngineSpeedAsync(
+            double targetEngineRpm,
+            bool increase,
+            CancellationToken engineCancellationToken)
         {
-            while (_rpm > newRpm)
+            while ((increase && EngineRpm < targetEngineRpm) || (!increase && EngineRpm > targetEngineRpm))
             {
-                if (token.IsCancellationRequested)
+                if (engineCancellationToken.IsCancellationRequested)
                 {
-                    break;
+                    return;
                 }
 
-                await Task.Delay(DelayTimeMilliseconds, token);
-                _rpm -= MotorStepIncrement;
-            }
-
-            if (_rpm < 0)
-            {
-                _rpm = 0;
-                _isRunning = false;
+                await Task.Delay(DelayTimeMilliseconds, engineCancellationToken);
+                EngineRpm += increase ? MotorStepIncrement : -MotorStepIncrement;
             }
         }
-
-        private async Task IncreaseEngineSpeed(double newRpm, CancellationToken token)
-        {
-            while (_rpm <= newRpm)
-            {
-                if (token.IsCancellationRequested)
-                {
-                    break;
-                }
-
-                await Task.Delay(DelayTimeMilliseconds, token);
-                _rpm += MotorStepIncrement;
-            }
-        }
-
-        private async Task FullEngineStop(double newRpm, CancellationToken token)
-        {
-            while (_rpm > 0)
-            {
-                if (token.IsCancellationRequested)
-                {
-                    break;
-                }
-
-                await Task.Delay(DelayTimeMilliseconds, token);
-                _rpm -= MotorStepIncrement;
-
-                if (_rpm < 0)
-                {
-                    _rpm = 0;
-                }
-            }
-            _isRunning = false;
-            return;
-        }
-
-        #endregion
     }
 }
