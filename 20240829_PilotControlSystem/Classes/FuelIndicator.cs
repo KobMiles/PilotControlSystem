@@ -6,7 +6,7 @@
 
         public override double GetValue()
         {
-            return Math.Round(engine.GetFuel(), 2, MidpointRounding.ToZero);
+            return Math.Round(engine.Fuel, 2, MidpointRounding.ToZero);
         }
 
         #endregion
