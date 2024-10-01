@@ -57,7 +57,7 @@ namespace _20240829_PilotControlSystem
 
         private void SliderGas_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Plane.Gas((int)SliderGas.Value);
+            Plane.AdjustThrottle((int)SliderGas.Value);
         }
 
         private void StartEngine_Button_Click(object sender, RoutedEventArgs e)
