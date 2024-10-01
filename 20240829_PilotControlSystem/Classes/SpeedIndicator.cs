@@ -14,9 +14,9 @@
 
         public override double GetValue()
         {
-            var speed = engine.GetRpm() <=MinRpm 
+            var speed = engine.EngineRpm <=MinRpm 
                 ? 0 
-                : Math.Round((double)(engine.GetRpm() - MinRpm) / (MaxRpm - MinRpm) * MaxSpeed);
+                : Math.Round((double)(engine.EngineRpm - MinRpm) / (MaxRpm - MinRpm) * MaxSpeed);
             return speed;
         }
 
