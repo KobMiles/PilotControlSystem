@@ -52,25 +52,26 @@
         #region ||| Engine Methods |||
         public void StartEngine()
         {
-            _engine.Start();
+            _ = _engine.StartAsync();
         }
         public void StopEngine()
         {
-            _engine.Stop();
+            _ = _engine.StopAsync();
         }
-        public void Gas(int percentGas)
+        public void AdjustThrottle(int percentGas)
         {
-            _engine.Gas(percentGas);
+            _ = _engine.AdjustThrottleAsync(percentGas);
         }
 
         public bool IsEngineRunning()
         {
-            return _engine.IsRunning();
+            return _engine.IsRunning;
         }
         public double GetEngineRpm()
         {
-            return _engine.GetRpm();
+            return _engine.EngineRpm;
         }
+
         #endregion
 
         #region ||| Indicators Methods |||
