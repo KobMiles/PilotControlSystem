@@ -55,7 +55,7 @@ Pilot-Control-System/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/Pilot-Control-System.git
+   git clone https://github.com/KobMiles/Pilot-Control-System
    ```
 
 2. Open the solution in Visual Studio:
